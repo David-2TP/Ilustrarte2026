@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>DANZAS FOLCLÓRICAS - Ilustrarte</title>
+    <link rel="icon" href="img/Logo-Colegio.png" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a0b10, #f06292);
+      color: #fce4ec;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 3em;
+      text-shadow: 0 0 10px #fce4ec, 0 0 25px #fce4ec;
+    }
+
+    .contenedor {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid #fce4ec;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px #fce4ec;
+    }
+
+    .autor {
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #ffffff;
+    }
+
+    img.principal {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 0 15px #fce4ec;
+    }
+
+    p.descripcion {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #dddddd;
+      padding: 0 20px;
+    }
+
+    .video {
+      margin-top: 30px;
+    }
+
+    iframe {
+      width: 90%;
+      max-width: 640px;
+      height: 360px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #fce4ec;
+    }
+
+    a.volver {
+      display: inline-block;
+      margin-top: 30px;
+      color: #fce4ec;
+      border: 1px solid #fce4ec;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    a.volver:hover {
+      background: #fce4ec;
+      color: #000;
+    }
+    .pdf-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.pdf-btn {
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #b66b08 0%, #8b5107 100%);
+  color: #fff3e0;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pdf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 243, 224, 0.6);
+}
+
+.pdf-section {
+  margin-top: 40px;
+  padding: 30px;
+  background: rgba(255, 243, 224, 0.05);
+  border: 2px solid #fff3e0;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 243, 224, 0.3);
+}
+
+.pdf-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #fff3e0;
+}
+
+.pdf-container {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #fff3e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.magazine-pages {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 15px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.magazine-page {
+  flex: 0 0 calc(50% - 10px);
+  aspect-ratio: 8.5 / 11;
+  background: white;
+  border: 3px solid #fff3e0;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.magazine-page:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(255, 243, 224, 0.4);
+}
+
+.magazine-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff3e0;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* Modal fullscreen para revista */
+.magazine-modal {
+  display: none;
+  position: fixed;
+  z-index: 10002;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(4, 2, 1, 0.95) 0%, rgba(0, 0, 0, 0.98) 100%);
+}
+
+.magazine-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magazine-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  height: 90vh;
+  background: white;
+  border: 4px solid #fff3e0;
+  border-radius: 15px;
+  box-shadow: 0 0 80px rgba(255, 243, 224, 0.8);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.magazine-modal-page {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: white;
+  padding: 20px;
+  perspective: 1500px;
+}
+
+.magazine-modal-page img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform-origin: left center;
+  transition: transform 0.8s ease;
+}
+
+/* EFECTO DE PASAR PÁGINA DOBLADO */
+    .page-turn {
+      animation: flipPage 0.8s ease forwards;
+    }
+
+    @keyframes flipPage {
+      0% { transform: rotateY(0deg); opacity: 1; }
+      50% { transform: rotateY(-90deg); opacity: 0.3; }
+      100% { transform: rotateY(0deg); opacity: 1; }
+    }
+
+    .magazine-modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: linear-gradient(135deg, #b66b08 0%, #8b5107 100%);
+      border-top: 2px solid #fff3e0;
+    }
+
+
+.magazine-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #b66b08 0%, #8b5107 100%);
+  border-top: 2px solid #fff3e0;
+}
+
+.modal-page-info {
+  color: #fff3e0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.modal-page-controls {
+  display: flex;
+  gap: 15px;
+}
+
+.modal-btn {
+  padding: 12px 25px;
+  background: rgba(255, 243, 224, 0.2);
+  color: #fff3e0;
+  border: 2px solid #fff3e0;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.modal-btn:hover:not(:disabled) {
+  background: rgba(255, 243, 224, 0.4);
+  transform: translateY(-2px);
+}
+
+.modal-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.close-magazine-modal {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #b66b08;
+  cursor: pointer;
+  z-index: 10003;
+  background: rgba(255, 243, 224, 0.9);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 243, 224, 0.5);
+}
+
+.close-magazine-modal:hover {
+  background: #fff3e0;
+  color: #040201;
+  transform: rotate(90deg);
+}
+
+:root {
+  --page-bg: #24131f;
+  --surface: #3b2034;
+  --surface-raised: #512b43;
+  --ink: #fff0f3;
+  --ink-muted: #e5c8d2;
+  --accent: #f2c078;
+  --accent-action: #ed8ca6;
+  --glow: rgba(237,140,166,.22);
+  --heading: #fff2df;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; min-height: 100vh; padding: 28px 18px 48px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: var(--ink); background: var(--page-bg);
+  background-image: radial-gradient(ellipse at 50% 0%, var(--glow), transparent 58%);
+  text-align: center;
+}
+h1 {
+  max-width: 1000px; margin: 26px auto 18px; padding: 0 12px;
+  color: var(--heading); font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 5vw, 3.35rem); line-height: 1.12;
+  letter-spacing: .055em; text-wrap: balance;
+  text-shadow: 0 4px 24px var(--glow);
+}
+.contenedor {
+  width: min(100%, 1000px); margin: 28px auto 0; padding: clamp(18px, 3vw, 34px);
+  background: linear-gradient(155deg, var(--surface-raised), var(--surface) 58%);
+  border: 1px solid color-mix(in srgb, var(--accent) 58%, transparent);
+  border-radius: 18px;
+  box-shadow: 0 22px 65px rgba(0,0,0,.34), 0 0 28px var(--glow);
+}
+.autor { margin: 0 0 18px; color: var(--accent); font-weight: 700; letter-spacing: .035em; }
+img.principal {
+  display: block; width: min(90%, 620px); max-height: 440px; object-fit: contain;
+  margin: 22px auto; border-radius: 13px; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  box-shadow: 0 14px 34px rgba(0,0,0,.35);
+}
+p.descripcion {
+  max-width: 780px; margin: 18px auto 26px; padding: 0 10px;
+  color: var(--ink-muted) !important; font-size: 1.04rem; line-height: 1.85;
+}
+.video { margin-top: 28px; }
+iframe { width: min(100%, 720px); aspect-ratio: 16 / 9; height: auto; border: 1px solid var(--accent); border-radius: 13px; box-shadow: 0 12px 32px var(--glow); }
+.pdf-section {
+  margin-top: 34px; padding: clamp(16px, 3vw, 28px);
+  background: color-mix(in srgb, var(--surface-raised) 76%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 15px; box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+.pdf-section h2 { margin: 0 0 18px; color: var(--heading); font-family: Georgia, serif; font-size: clamp(1.35rem, 3vw, 1.85rem); }
+.pdf-container { margin: 18px 0 0; padding: 14px; background: rgba(0,0,0,.20); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); border-radius: 12px; }
+.pdf-container p { color: var(--ink-muted) !important; }
+.magazine-pages { display: flex; gap: 18px; overflow-x: auto; padding: 14px 6px 20px; scroll-behavior: smooth; scroll-snap-type: x mandatory; }
+.magazine-page {
+  flex: 0 0 clamp(190px, 42%, 310px); aspect-ratio: 8.5 / 11; position: relative; overflow: hidden;
+  background: #fff; border: 2px solid var(--accent); border-radius: 9px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35); scroll-snap-align: start; cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.magazine-page:hover { transform: translateY(-5px); box-shadow: 0 18px 35px var(--glow); }
+.magazine-page img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.page-number { position: absolute; right: 10px; bottom: 10px; padding: 7px 11px; color: #fff; background: rgba(15,15,18,.82); border: 1px solid var(--accent); border-radius: 6px; font-weight: 700; }
+.pdf-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.pdf-btn, a.volver {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 12px 22px; color: var(--page-bg) !important; background: var(--accent) !important;
+  border: 1px solid var(--accent) !important; border-radius: 999px;
+  font-weight: 750; text-decoration: none; cursor: pointer;
+  transition: transform .22s ease, filter .22s ease, box-shadow .22s ease;
+}
+a.volver { margin-top: 28px; color: var(--ink) !important; background: transparent !important; border-color: var(--accent) !important; }
+.pdf-btn:hover, a.volver:hover { transform: translateY(-3px); filter: brightness(1.08); box-shadow: 0 9px 22px var(--glow); }
+.magazine-modal {
+  display: none; position: fixed; inset: 0; z-index: 10002;
+  width: 100%; height: 100%; padding: 16px;
+  background: rgba(5,7,10,.94); backdrop-filter: blur(9px);
+}
+.magazine-modal.active { display: flex; align-items: center; justify-content: center; }
+.magazine-modal-content {
+  position: relative; display: flex; flex-direction: column; overflow: hidden;
+  width: min(94vw, 920px); height: min(92vh, 1000px);
+  background: #fff; border: 2px solid var(--accent); border-radius: 14px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.55);
+}
+.magazine-modal-page { flex: 1; min-height: 0; overflow: auto; display: flex; justify-content: center; align-items: flex-start; padding: 18px; background: #f7f7f7; perspective: 1400px; }
+.magazine-modal-page img { display: block; width: auto; max-width: 100%; height: auto; object-fit: contain; transform-origin: left center; }
+.page-turn { animation: flipPage .65s ease forwards; }
+@keyframes flipPage { 0% { transform: rotateY(0); opacity: 1; } 50% { transform: rotateY(-75deg); opacity: .45; } 100% { transform: rotateY(0); opacity: 1; } }
+.magazine-modal-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 15px 20px; color: var(--ink); background: var(--surface); border-top: 1px solid var(--accent); }
+.modal-page-info { color: var(--ink); font-weight: 750; }
+.modal-page-controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.modal-btn { padding: 10px 17px; color: var(--ink); background: var(--surface-raised); border: 1px solid var(--accent); border-radius: 999px; font-weight: 700; cursor: pointer; transition: .2s ease; }
+.modal-btn:hover:not(:disabled) { color: var(--page-bg); background: var(--accent); transform: translateY(-2px); }
+.modal-btn:disabled { opacity: .4; cursor: not-allowed; }
+.close-magazine-modal {
+  position: absolute; top: 10px; right: 12px; z-index: 10003;
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  color: var(--page-bg); background: var(--accent); border-radius: 50%;
+  font-size: 2rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25);
+}
+.close-magazine-modal:hover { transform: rotate(90deg); }
+:focus-visible { outline: 3px solid var(--accent-action); outline-offset: 3px; }
+@media (max-width: 620px) {
+  body { padding: 14px 10px 32px; }
+  .contenedor { margin-top: 18px; padding: 16px 12px; }
+  .magazine-page { flex-basis: 78%; }
+  .magazine-modal-footer { justify-content: center; text-align: center; }
+  .modal-page-controls { justify-content: center; }
+  img.principal { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+/* ===== AJUSTE DE CENTRADO DE PÁGINAS E IMÁGENES ===== */
+.magazine-pages {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 310px));
+  justify-content: center;
+  align-items: start;
+  gap: 20px;
+  overflow-x: visible;
+  padding: 16px 10px 20px;
+}
+
+.magazine-page {
+  width: 100%;
+  min-width: 0;
+  flex: initial !important;
+  margin: 0 auto;
+}
+
+.magazine-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* La galería fotográfica también queda centrada */
+.galeria-grid {
+  justify-content: center;
+  justify-items: center;
+}
+
+.galeria-item {
+  width: 100%;
+}
+
+@media (max-width: 620px) {
+  .magazine-pages {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 16px;
+  }
+
+  .magazine-page {
+    width: min(100%, 310px);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>DANZAS FOLCLÓRICAS</h1>
+
+  <div class="contenedor">  
+
+    <p class="descripcion">
+      Preservamos y celebramos nuestras tradiciones culturales a través de la danza. Nuestro grupo folclórico mantiene viva la riqueza de nuestras raíces, expresando la identidad y el orgullo de nuestra cultura ancestral.
+    </p>
+
+    <div class="video">
+
+      <h2>📖 Documentación Completa</h2>
+      <div class="pdf-container">
+        <p style="margin-bottom: 20px; color: #dddddd;">Haz clic en cualquier página para verla en detalle</p>
+        <div class="magazine-pages" id="magazinePages">
+          <div class="magazine-page" onclick="openMagazineModal(0)">
+            <img src="img/Danzas Folcloricas-imágenes-0.jpg" alt="Página 1">
+            <div class="page-number">1</div>
+          </div>
+          <div class="magazine-page" onclick="openMagazineModal(1)">
+            <img src="img/Danzas Folcloricas-imágenes-1.jpg" alt="Página 2">
+            <div class="page-number">2</div>
+        </div>
+      </div>
+    </div>
+ <div class="pdf-controls">
+        <a href="pdf1/Danzas Folcloricas.pdf" class="pdf-btn" target="_blank" rel="noopener noreferrer">📄 Ver PDF Completo</a>
+      </div>
+
+    <audio id="click-sound" src="mp3/partyfavorraspypart_ac01_3_5HTQ8CW.mp3" preload="auto"></audio>
+    <a class="volver" href="index.html">← Volver a la página principal</a>
+  </div>
+
+  <div id="magazineModal" class="magazine-modal">
+    <div class="magazine-modal-content">
+      <span class="close-magazine-modal" onclick="closeMagazineModal()">&times;</span>
+      <div class="magazine-modal-page">
+        <img id="modalPageImage" src="" alt="Página revista">
+      </div>
+      <div class="magazine-modal-footer">
+        <div class="modal-page-info">
+          Página <span id="modalPageNumber">1</span> de <span id="modalTotalPages">3</span>
+        </div>
+        <div class="modal-page-controls">
+          <button class="modal-btn" id="prevBtn" onclick="previousMagazinePage()">⬅ Anterior</button>
+          <button class="modal-btn" id="nextBtn" onclick="nextMagazinePage()">Siguiente ➡</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  let currentMagazinePage = 0;
+  const magazinePages = document.querySelectorAll('.magazine-page');
+  const totalPages = magazinePages.length;
+  const sonidoClick = document.getElementById('click-sound');
+  const botonVolver = document.querySelector('.volver');
+
+  function openMagazineModal(pageIndex) {
+    currentMagazinePage = pageIndex;
+    const modal = document.getElementById('magazineModal');
+    const pageImage = magazinePages[pageIndex].querySelector('img').src;
+
+    document.getElementById('modalPageImage').src = pageImage;
+    document.getElementById('modalPageNumber').textContent = pageIndex + 1;
+    document.getElementById('modalTotalPages').textContent = totalPages;
+
+    modal.classList.add('active');
+    updateMagazineButtons();
+  }
+
+  function closeMagazineModal() {
+    document.getElementById('magazineModal').classList.remove('active');
+  }
+
+  function nextMagazinePage() {
+    if (currentMagazinePage < totalPages - 1) {
+      currentMagazinePage++;
+      flipPageEffect();
+      updateMagazinePage();
+      reproducirSonido();
+    }
+  }
+
+  function previousMagazinePage() {
+    if (currentMagazinePage > 0) {
+      currentMagazinePage--;
+      flipPageEffect();
+      updateMagazinePage();
+      reproducirSonido();
+    }
+  }
+
+  function flipPageEffect() {
+    const img = document.getElementById('modalPageImage');
+    img.classList.remove('page-turn');
+    void img.offsetWidth; // reinicia animación
+    img.classList.add('page-turn');
+  }
+
+  function updateMagazinePage() {
+    const pageImage = magazinePages[currentMagazinePage].querySelector('img').src;
+    document.getElementById('modalPageImage').src = pageImage;
+    document.getElementById('modalPageNumber').textContent = currentMagazinePage + 1;
+    updateMagazineButtons();
+  }
+
+  function updateMagazineButtons() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    prevBtn.disabled = currentMagazinePage <= 0;
+    nextBtn.disabled = currentMagazinePage >= totalPages - 1;
+  }
+
+  // Cierra modal al hacer clic fuera del contenido
+  document.getElementById('magazineModal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeMagazineModal();
+  });
+
+  // Sonido de clic reutilizable
+  function reproducirSonido() {
+    sonidoClick.currentTime = 0;
+    sonidoClick.play();
+  }
+
+  // Reproduce sonido al hacer clic en "Volver"
+  botonVolver.addEventListener('click', (event) => {
+    event.preventDefault();
+    reproducirSonido();
+    sonidoClick.onended = () => {
+      window.location.href = botonVolver.href;
+    };
+  });
+</script>
+
+</body>
+</html>
