@@ -509,10 +509,6 @@ body {
     --font-body: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
 }
 
-/* ==========================================
-   FONDO GENERAL
-========================================== */
-
 html,
 body {
     background: var(--dark-bg);
@@ -549,10 +545,6 @@ body {
     opacity: 0.075;
     pointer-events: none;
 }
-
-/* ==========================================
-   SIDEBAR - LOGO INSTITUCIONAL
-========================================== */
 
 .sidebar-toggle {
     position: fixed;
@@ -602,9 +594,6 @@ body {
     box-shadow: 0 0 16px var(--accent-glow);
 }
 
-/* ==========================================
-   PANEL LATERAL
-========================================== */
 
 .sidebar {
     background: linear-gradient(
@@ -631,11 +620,6 @@ body {
     border-left-color: var(--accent);
 }
 
-/* ==========================================
-   ENCABEZADO
-========================================== */
-
-/* Eliminar el logo circular del encabezado */
 
 .logo-wrap {
     display: none;
@@ -654,9 +638,6 @@ body {
     color: var(--accent);
 }
 
-/* ==========================================
-   NAVEGACIÓN POR AÑOS
-========================================== */
 
 .year-nav {
     gap: 14px;
@@ -718,10 +699,6 @@ body {
 
     box-shadow: 0 4px 14px var(--accent-glow) !important;
 }
-
-/* ==========================================
-   TARJETAS DE LA REVISTA
-========================================== */
 
 /* Compatibilidad con las clases existentes */
 
@@ -825,10 +802,6 @@ body {
     border-color: var(--border-bright);
 }
 
-/* ==========================================
-   TEXTOS GENERALES
-========================================== */
-
 .hud-label {
     color: var(--text-main);
 }
@@ -886,11 +859,6 @@ body {
         background-size: 100vw;
     }
 }
-
-/* ==================================================
-   ILUSTRARTE - REDISEÑO EDITORIAL INSTITUCIONAL
-   Colegio Alberto Lleras Camargo | 2026
-================================================== */
 
 /* 1. PALETA DE COLORES */
 
