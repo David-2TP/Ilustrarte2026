@@ -19,7 +19,7 @@
 
   <!-- Botón menú -->
   <button class="sidebar-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false"> 
-  <img src="Logo-Colegio.png" alt="Logo del colegio">
+    <img src="Logo-Colegio.png" alt="Logo del colegio">
   </button>
 
   <!-- Sidebar -->
@@ -46,29 +46,14 @@
     <div class="hud-divider"><span>● EDICIÓN 2026  ●</span></div>
 
     <!-- Navegación de año -->
-<nav class="year-nav">
-    <a href="https://linktr.ee/LLERASILUSTRARTE11"
-      class="btn-year"
-      id="btn20241">
-        ◀ 2024
-    </a>
+    <nav class="year-nav">
+      <a href="https://linktr.ee/LLERASILUSTRARTE11" class="btn-year" id="btn20241">◀ 2024</a>
+      <a href="https://asmael-chan.github.io/ILUSTRATE/" class="btn-year" id="btn20251">2025</a>
+      <a href="index.html" class="btn-year active" id="btn20261" aria-current="page">2026 ▶</a>
+    </nav>
 
-    <a href="https://asmael-chan.github.io/ILUSTRATE/"
-      class="btn-year"
-      id="btn20251">
-        2025
-    </a>
-
-    <a href="index.html"
-      class="btn-year active"
-      id="btn20261"
-      aria-current="page">
-        2026 ▶
-    </a>
-</nav>
     <!-- Grid de secciones -->
     <div class="hud-grid">
-
       <a href="editorial.html" class="hud-card">
         <img class="card-img" src="Editorialportada.jpg" alt="Editorial">
         <div class="card-label"><span class="card-label-dot"></span><h2>Editorial</h2></div>
@@ -86,9 +71,7 @@
 
       <a href="donacion-choco.html" class="hud-card">
         <img class="card-img" src="chocóportada.jpg" alt="Escapando de la Rutina">
-        <div class="card-label"><span class="card-label-dot"></span><h2>Donación a Chocó
-          
-        </h2></div>
+        <div class="card-label"><span class="card-label-dot"></span><h2>Donación a Chocó</h2></div>
       </a>
 
       <a href="feria_empresarial.html" class="hud-card">
@@ -135,7 +118,6 @@
         <img class="card-img" src="Mateolimpiadas.jpg" alt="Mate-Olimpiadas">
         <div class="card-label"><span class="card-label-dot"></span><h2>Mate-Olimpiadas</h2></div>
       </a>
-
     </div>
 
     <footer class="site-footer">
@@ -145,33 +127,58 @@
     </footer>
 
   </div>
-  
+
   <!-- Presentación de bienvenida 2026 -->
   <div class="intro-video-overlay" id="introVideoOverlay" role="dialog" aria-modal="true" aria-label="Presentación ILUSTRARTE 2026">
     <div class="intro-video-frame">
       <button class="intro-video-close" id="closeIntroVideo" type="button" aria-label="Cerrar presentación">&times;</button>
-      <video id="introVideo" autoplay playsinline preload="auto">
+      <video id="introVideo" autoplay muted playsinline preload="auto">
         <source src="Presentación2026.mp4" type="video/mp4">
         Tu navegador no puede reproducir este video.
       </video>
-      <button class="intro-video-audio" id="enableIntroAudio" type="button" hidden>Activar sonido y reproducir</button>
+      <button class="intro-video-audio" id="enableIntroAudio" type="button">🔊 Activar sonido</button>
     </div>
   </div>
 
+  <script>
+    (() => {
+      const overlay = document.getElementById('introVideoOverlay');
+      const video = document.getElementById('introVideo');
+      const close = document.getElementById('closeIntroVideo');
+      const audioButton = document.getElementById('enableIntroAudio');
+      if (!overlay || !video || !close) return;
+
+      const closeIntro = () => {
+        video.pause();
+        video.currentTime = 0;
+        overlay.classList.add('is-hidden');
+      };
+
+      close.addEventListener('click', closeIntro);
+      video.addEventListener('ended', closeIntro);
+
+      audioButton.addEventListener('click', async () => {
+        video.muted = false;
+        audioButton.hidden = true;
+        try { 
+          await video.play(); 
+        } catch (error) { 
+          console.error(error); 
+        }
+      });
+
+      video.play().catch(() => {
+        audioButton.hidden = false;
+      });
+    })();
+  </script>
+
   <!-- Audios -->
-  <audio id="hoverSoundMain" preload="auto">
-    <source src="fnaf-open-camera-sound.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="clickSound" preload="auto">
-    <source src="touhou-pause-sfx.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="hoverSoundMain" preload="auto"><source src="fnaf-open-camera-sound.mp3" type="audio/mpeg"></audio>
+  <audio id="clickSound" preload="auto"><source src="touhou-pause-sfx.mp3" type="audio/mpeg"></audio>
   <audio id="clickSound1" preload="auto" src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3"></audio>
-  <audio id="clickYear1" preload="auto">
-    <source src="fnaf-open-camera-sound.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="sidebarButtonSound" preload="auto">
-    <source src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="clickYear1" preload="auto"><source src="fnaf-open-camera-sound.mp3" type="audio/mpeg"></audio>
+  <audio id="sidebarButtonSound" preload="auto"><source src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3" type="audio/mpeg"></audio>
 
 </body>
 </html>
