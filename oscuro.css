@@ -537,7 +537,7 @@ body {
     position: absolute;
     inset: 0;
 
-    background-image: url("img/Logo-Colegio.png");
+    background-image: url("Logo-Colegio.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: min(75vw, 850px);
