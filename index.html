@@ -4,54 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ILUSTRARTE — Revista Escolar Alberto Lleras</title>
-  <link rel="icon" href="Logo-Colegio.png" type="image/x-icon">
+  <link rel="icon" href="img/Logo-Colegio.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="oscuro.css">
-
-  <!-- Descripciones al pasar el mouse sobre las tarjetas -->
-  <style>
-    /* Se ubica sobre la imagen (parte superior) para no tapar el título de la tarjeta.
-       Usa las variables de color y fuentes de oscuro.css. */
-    .card-desc {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 0;
-      padding: 14px 16px;
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.35;
-      color: var(--text-main);
-      text-align: center;
-      background: rgba(11, 26, 18, 0.92);
-      border-bottom: 1px solid var(--accent);
-      opacity: 0;
-      transform: translateY(-12px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .hud-card:hover .card-desc,
-    .hud-card:focus-visible .card-desc,
-    .hud-card:focus-within .card-desc {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* En pantallas táctiles no existe "hover": se muestra siempre, de forma discreta */
-    @media (hover: none) {
-      .card-desc {
-        opacity: 1;
-        transform: none;
-        font-size: 0.85rem;
-        padding: 10px 12px 12px;
-      }
-    }
-  </style>
-
+  <link rel="stylesheet" href="css/oscuro.css">
   <script defer src="js/modo.js"></script>
   <script defer src="js/main.js"></script>
 </head>
@@ -115,81 +70,70 @@
     <div class="hud-grid">
 
       <a href="editorial.html" class="hud-card">
-        <img class="card-img" src="Editorialportada.jpg" alt="Editorial">
+        <img class="card-img" src="img/Editorialportada.jpg" alt="Editorial">
         <div class="card-label"><span class="card-label-dot"></span><h2>Editorial</h2></div>
-        <p class="card-desc">Presentación de la revista y mensaje del equipo que hace posible esta edición.</p>
       </a>
 
       <a href="la_voz_llerista.html" class="hud-card">
-        <img class="card-img" src="Voz-llerista.jpeg" alt="La Voz Llerista">
+        <img class="card-img" src="img/Voz-llerista.jpeg" alt="La Voz Llerista">
         <div class="card-label"><span class="card-label-dot"></span><h2>La Voz Llerista</h2></div>
-        <p class="card-desc">Concurso de canto donde estudiantes del colegio y de otras instituciones demostraron su voz y su talento musical.</p>
       </a>
 
       <a href="melodias_del_exito.html" class="hud-card">
-        <img class="card-img" src="Melodiasportada.jpg" alt="Melodías del Éxito">
+        <img class="card-img" src="img/Melodiasportada.jpg" alt="Melodías del Éxito">
         <div class="card-label"><span class="card-label-dot"></span><h2>Melodías del Éxito</h2></div>
-        <p class="card-desc">Talento, nervios y mucha música: la oportunidad que te da el colegio para conocer tu voz.</p>
       </a>
 
       <a href="donacion-choco.html" class="hud-card">
-        <img class="card-img" src="chocóportada.jpg" alt="Donación a Chocó">
-        <div class="card-label"><span class="card-label-dot"></span><h2>Donación a Chocó</h2></div>
-        <p class="card-desc">La campaña solidaria del colegio para apoyar a las familias del Chocó.</p>
+        <img class="card-img" src="img/chocóportada.jpg" alt="Escapando de la Rutina">
+        <div class="card-label"><span class="card-label-dot"></span><h2>Donación a Chocó
+          
+        </h2></div>
       </a>
 
       <a href="feria_empresarial.html" class="hud-card">
-        <img class="card-img" src="FeriaEmpresarial.jpg" alt="Feria Empresarial">
+        <img class="card-img" src="img/FeriaEmpresarial.jpg" alt="Feria Empresarial">
         <div class="card-label"><span class="card-label-dot"></span><h2>Feria Empresarial</h2></div>
-        <p class="card-desc">Ideas de negocio y productos creados por los estudiantes, presentados en una feria de emprendimiento.</p>
       </a>
 
       <a href="asopadres.html" class="hud-card">
-        <img class="card-img" src="Asopadres.jpeg" alt="Asopadres">
+        <img class="card-img" src="img/Asopadres.jpeg" alt="Asopadres">
         <div class="card-label"><span class="card-label-dot"></span><h2>Asopadres</h2></div>
-        <p class="card-desc">La asociación de padres de familia: su labor, actividades y apoyo a la institución.</p>
       </a>
       
       <a href="tecnologia.html" class="hud-card">
-        <img class="card-img" src="Tecnologiaportada.jpg" alt="Tecnología">
+        <img class="card-img" src="img/Tecnologiaportada.jpg" alt="Tecnología">
         <div class="card-label"><span class="card-label-dot"></span><h2>Tecnología</h2></div>
-        <p class="card-desc">Innovación, herramientas digitales y proyectos tecnológicos del colegio.</p>
       </a>
 
       <a href="proyecto_prae.html" class="hud-card">
-        <img class="card-img" src="ProyectoPrae.jpg" alt="Proyecto PRAE">
+        <img class="card-img" src="img/ProyectoPrae.jpg" alt="Proyecto PRAE">
         <div class="card-label"><span class="card-label-dot"></span><h2>Proyecto PRAE</h2></div>
-        <p class="card-desc">Acciones ambientales escolares para cuidar y proteger nuestro entorno.</p>
       </a>
 
       <a href="expociencia.html" class="hud-card">
-        <img class="card-img" src="Expocienciaport.jpg" alt="Expociencia">
+        <img class="card-img" src="img/Expocienciaport.jpg" alt="Expociencia">
         <div class="card-label"><span class="card-label-dot"></span><h2>Expociencia</h2></div>
-        <p class="card-desc">Experimentos e investigaciones científicas expuestos por los estudiantes.</p>
       </a>
 
       <a href="cronica_expociencia.html" class="hud-card">
-        <img class="card-img" src="Cronica.expociencia.jpg" alt="Crónica Expociencia">
+        <img class="card-img" src="img/Cronica.expociencia.jpg" alt="Crónica Expociencia">
         <div class="card-label"><span class="card-label-dot"></span><h2>Crónica Expociencia</h2></div>
-        <p class="card-desc">El relato de todo lo que se vio en la feria: física, tecnología, historia, ciencias y artes.</p>
       </a>
 
       <a href="cultura_lectura.html" class="hud-card">
         <img class="card-img" src="img/Centro-de-interes.jpg" alt="Centro de Interés">
         <div class="card-label"><span class="card-label-dot"></span><h2>Centro de Interés</h2></div>
-        <p class="card-desc">Lectura, cultura y tiempo libre para aprender cosas de tu gusto, con actividades que despiertan nuevas pasiones.</p>
       </a>
 
       <a href="danzas.html" class="hud-card">
-        <img class="card-img" src="Danzas-Folcloricas.jpeg" alt="Danzas Folclóricas">
+        <img class="card-img" src="img/Danzas-Folcloricas.jpeg" alt="Danzas Folclóricas">
         <div class="card-label"><span class="card-label-dot"></span><h2>Danzas Folclóricas</h2></div>
-        <p class="card-desc">Tradición, color y ritmo: las danzas folclóricas del colegio y sus presentaciones.</p>
       </a>
 
       <a href="mate-olimpiadas.html" class="hud-card">
-        <img class="card-img" src="Mateolimpiadas.jpg" alt="Mate-Olimpiadas">
+        <img class="card-img" src="img/Mateolimpiadas.jpg" alt="Mate-Olimpiadas">
         <div class="card-label"><span class="card-label-dot"></span><h2>Mate-Olimpiadas</h2></div>
-        <p class="card-desc">Competencias y retos matemáticos donde los estudiantes ponen a prueba su ingenio.</p>
       </a>
 
     </div>
@@ -247,17 +191,17 @@
 
   <!-- Audios -->
   <audio id="hoverSoundMain" preload="auto">
-    <source src="fnaf-open-camera-sound.mp3" type="audio/mpeg">
+    <source src="mp3/fnaf-open-camera-sound.mp3" type="audio/mpeg">
   </audio>
   <audio id="clickSound" preload="auto">
-    <source src="touhou-pause-sfx.mp3" type="audio/mpeg">
+    <source src="mp3/touhou-pause-sfx.mp3" type="audio/mpeg">
   </audio>
-  <audio id="clickSound1" preload="auto" src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3"></audio>
+  <audio id="clickSound1" preload="auto" src="mp3/door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3"></audio>
   <audio id="clickYear1" preload="auto">
-    <source src="fnaf-open-camera-sound.mp3" type="audio/mpeg">
+    <source src="mp3/fnaf-open-camera-sound.mp3" type="audio/mpeg">
   </audio>
   <audio id="sidebarButtonSound" preload="auto">
-    <source src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3" type="audio/mpeg">
+    <source src="mp3/door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3" type="audio/mpeg">
   </audio>
 
 </body>
