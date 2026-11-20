@@ -8,10 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="oscuro.css">
 
-  <!-- Descripciones al pasar el mouse sobre las tarjetas -->
+  <!-- Descripciones de las tarjetas + presentación en video -->
   <style>
-    /* Se ubica sobre la imagen (parte superior) para no tapar el título de la tarjeta.
-       Usa las variables de color y fuentes de oscuro.css. */
+
     .card-desc {
       position: absolute;
       top: 0;
@@ -34,22 +33,120 @@
       z-index: 5;
     }
 
-    .hud-card:hover .card-desc,
-    .hud-card:focus-visible .card-desc,
-    .hud-card:focus-within .card-desc {
-      opacity: 1;
-      transform: translateY(0);
+    /* Botón "i" (solo se muestra en celulares / pantallas táctiles) */
+    .card-info {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(11, 26, 18, 0.92);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font-title);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 28px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 6;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* En pantallas táctiles no existe "hover": se muestra siempre, de forma discreta */
-    @media (hover: none) {
-      .card-desc {
+    /* Computador: aparece al pasar el mouse */
+    @media (hover: hover) {
+      .hud-card:hover .card-desc,
+      .hud-card:focus-visible .card-desc {
         opacity: 1;
-        transform: none;
-        font-size: 0.85rem;
-        padding: 10px 12px 12px;
+        transform: translateY(0);
       }
     }
+
+    /* Celular: aparece solo al tocar el botón "i" */
+    @media (hover: none) {
+      .card-info { display: block; }
+
+      .card-desc {
+        font-size: 0.85rem;
+        padding: 10px 44px 12px 12px;
+        text-align: left;
+      }
+
+      .hud-card.desc-open .card-desc {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- Presentación de bienvenida (video) ---------- */
+    .intro-video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 20000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.94);
+    }
+
+    .intro-video-overlay.is-hidden { display: none; }
+
+    .intro-video-frame {
+      position: relative;
+      width: min(100%, 1100px);
+      max-height: 100%;
+    }
+
+    .intro-video-frame video {
+      display: block;
+      width: 100%;
+      max-height: 100vh;
+      max-height: 100dvh;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .intro-video-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      background: rgba(11, 26, 18, 0.9);
+      color: var(--text-main);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .intro-video-audio {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      z-index: 2;
+      padding: 10px 18px;
+      border-radius: 5px;
+      border: 1px solid var(--accent);
+      background: rgba(11, 26, 18, 0.92);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .intro-video-audio[hidden] { display: none; }
   </style>
 
   <script defer src="modo.js"></script>
@@ -145,7 +242,7 @@
       </a>
 
       <a href="asopadres.html" class="hud-card">
-        <img class="card-img" src="Asopadres.jpeg" alt="Asopadres">
+        <img class="card-img" src="img/Asopadres.jpeg" alt="Asopadres">
         <div class="card-label"><span class="card-label-dot"></span><h2>Asopadres</h2></div>
         <p class="card-desc">La asociación de padres de familia: su labor, actividades y apoyo a la institución.</p>
       </a>
@@ -211,7 +308,7 @@
         <source src="Presentación2026.mp4" type="video/mp4">
         Tu navegador no puede reproducir este video.
       </video>
-      <button class="intro-video-audio" id="enableIntroAudio" type="button" hidden>Activar sonido y reproducir</button>
+      <button class="intro-video-audio" id="enableIntroAudio" type="button" hidden>🔊 Activar sonido</button>
     </div>
   </div>
 
@@ -223,24 +320,71 @@
       const audioButton = document.getElementById('enableIntroAudio');
       if (!overlay || !video || !close) return;
 
+      // Mientras el video está abierto, la página de atrás no se desplaza
+      document.body.style.overflow = 'hidden';
+
       const closeIntro = () => {
         video.pause();
         video.currentTime = 0;
         overlay.classList.add('is-hidden');
+        document.body.style.overflow = '';
       };
       close.addEventListener('click', closeIntro);
       video.addEventListener('ended', closeIntro);
+
       audioButton.addEventListener('click', async () => {
         video.muted = false;
         try { await video.play(); audioButton.hidden = true; }
         catch (error) { audioButton.hidden = false; }
       });
+
       video.muted = false;
       video.play().then(() => {
         audioButton.hidden = true;
       }).catch(() => {
-        // Algunos navegadores bloquean el autoplay con audio hasta que el visitante interactúe.
-        audioButton.hidden = false;
+        video.muted = true;
+        video.play().then(() => {
+          audioButton.textContent = '🔊 Activar sonido';
+          audioButton.hidden = false;
+        }).catch(() => {
+          audioButton.textContent = '▶ Reproducir';
+          audioButton.hidden = false;
+        });
+      });
+    })();
+  </script>
+
+  <!-- Botón "i" de las tarjetas (celulares) -->
+  <script>
+    (() => {
+      const cards = document.querySelectorAll('.hud-card');
+
+      cards.forEach((card) => {
+        if (!card.querySelector('.card-desc')) return;
+
+        const btn = document.createElement('span');
+        btn.className = 'card-info';
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('aria-label', 'Ver descripción');
+        btn.textContent = 'i';
+
+        btn.addEventListener('click', (e) => {
+          // Evita que el toque abra la sección
+          e.preventDefault();
+          e.stopPropagation();
+          const abierta = card.classList.contains('desc-open');
+          cards.forEach((c) => c.classList.remove('desc-open'));
+          if (!abierta) card.classList.add('desc-open');
+        });
+
+        card.appendChild(btn);
+      });
+
+      // Tocar fuera de una tarjeta cierra la descripción abierta
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.hud-card')) {
+          cards.forEach((c) => c.classList.remove('desc-open'));
+        }
       });
     })();
   </script>
