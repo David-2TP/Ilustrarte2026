@@ -83,6 +83,79 @@
     .intro-video-audio[hidden] {
       display: none;
     }
+
+    /* ---------- Descripciones de las tarjetas ---------- */
+    /* Se ubica sobre la imagen (parte superior) para no tapar el título de la tarjeta.
+       Usa las variables de color y fuentes de oscuro.css. */
+    .card-desc {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-main);
+      text-align: center;
+      background: rgba(11, 26, 18, 0.92);
+      border-bottom: 1px solid var(--accent);
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Botón "i" para ver la descripción (solo celulares / pantallas pequeñas) */
+    .card-info {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(11, 26, 18, 0.92);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 6;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Computador con mouse: aparece al pasar el mouse */
+    @media (hover: hover) and (pointer: fine) {
+      .hud-card:hover .card-desc {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Celular o pantalla pequeña: aparece el botón "i" y la descripción se abre al tocarlo */
+    @media (hover: none), (pointer: coarse), (max-width: 900px) {
+      .card-info {
+        display: block;
+      }
+
+      .card-desc {
+        font-size: 0.85rem;
+        padding: 10px 46px 12px 12px;
+        text-align: left;
+      }
+
+      .hud-card.desc-open .card-desc {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 
   <script defer src="modo.js"></script>
@@ -150,16 +223,22 @@
       <a href="editorial.html" class="hud-card">
         <img class="card-img" src="Editorialportada.jpg" alt="Editorial">
         <div class="card-label"><span class="card-label-dot"></span><h2>Editorial</h2></div>
+        <p class="card-desc">Presentación de la revista y mensaje del equipo que hace posible esta edición.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="la_voz_llerista.html" class="hud-card">
         <img class="card-img" src="Voz-llerista.jpeg" alt="La Voz Llerista">
         <div class="card-label"><span class="card-label-dot"></span><h2>La Voz Llerista</h2></div>
+        <p class="card-desc">Concurso de canto donde estudiantes del colegio y de otras instituciones demostraron su voz y su talento musical.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="melodias_del_exito.html" class="hud-card">
         <img class="card-img" src="Melodiasportada.jpg" alt="Melodías del Éxito">
         <div class="card-label"><span class="card-label-dot"></span><h2>Melodías del Éxito</h2></div>
+        <p class="card-desc">Talento, nervios y mucha música: la oportunidad que te da el colegio para conocer tu voz.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="donacion-choco.html" class="hud-card">
@@ -167,51 +246,71 @@
         <div class="card-label"><span class="card-label-dot"></span><h2>Donación a Chocó
           
         </h2></div>
+        <p class="card-desc">La campaña solidaria del colegio para apoyar a las familias del Chocó.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="feria_empresarial.html" class="hud-card">
         <img class="card-img" src="FeriaEmpresarial.jpg" alt="Feria Empresarial">
         <div class="card-label"><span class="card-label-dot"></span><h2>Feria Empresarial</h2></div>
+        <p class="card-desc">Ideas de negocio y productos creados por los estudiantes, presentados en una feria de emprendimiento.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="asopadres.html" class="hud-card">
         <img class="card-img" src="Asopadres.jpeg" alt="Asopadres">
         <div class="card-label"><span class="card-label-dot"></span><h2>Asopadres</h2></div>
+        <p class="card-desc">La asociación de padres de familia: su labor, actividades y apoyo a la institución.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
       
       <a href="tecnologia.html" class="hud-card">
         <img class="card-img" src="Tecnologiaportada.jpg" alt="Tecnología">
         <div class="card-label"><span class="card-label-dot"></span><h2>Tecnología</h2></div>
+        <p class="card-desc">Innovación, herramientas digitales y proyectos tecnológicos del colegio.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="proyecto_prae.html" class="hud-card">
         <img class="card-img" src="ProyectoPrae.jpg" alt="Proyecto PRAE">
         <div class="card-label"><span class="card-label-dot"></span><h2>Proyecto PRAE</h2></div>
+        <p class="card-desc">Acciones ambientales escolares para cuidar y proteger nuestro entorno.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="expociencia.html" class="hud-card">
         <img class="card-img" src="Expocienciaport.jpg" alt="Expociencia">
         <div class="card-label"><span class="card-label-dot"></span><h2>Expociencia</h2></div>
+        <p class="card-desc">Experimentos e investigaciones científicas expuestos por los estudiantes.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="cronica_expociencia.html" class="hud-card">
         <img class="card-img" src="Cronica.expociencia.jpg" alt="Crónica Expociencia">
         <div class="card-label"><span class="card-label-dot"></span><h2>Crónica Expociencia</h2></div>
+        <p class="card-desc">El relato de todo lo que se vio en la feria: Matemáticas, física, tecnología y artes.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="cultura_lectura.html" class="hud-card">
         <img class="card-img" src="Centro-de-interes.jpg" alt="Centro de Interés">
         <div class="card-label"><span class="card-label-dot"></span><h2>Centro de Interés</h2></div>
+        <p class="card-desc">Lectura, cultura y tiempo libre para aprender cosas de tu gusto, con actividades que despiertan nuevas pasiones.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="danzas.html" class="hud-card">
         <img class="card-img" src="Danzas-Folcloricas.jpeg" alt="Danzas Folclóricas">
         <div class="card-label"><span class="card-label-dot"></span><h2>Danzas Folclóricas</h2></div>
+        <p class="card-desc">Tradición, color y ritmo: las danzas folclóricas del colegio y sus presentaciones.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
       <a href="mate-olimpiadas.html" class="hud-card">
         <img class="card-img" src="Mateolimpiadas.jpg" alt="Mate-Olimpiadas">
         <div class="card-label"><span class="card-label-dot"></span><h2>Mate-Olimpiadas</h2></div>
+        <p class="card-desc">Competencias y retos matemáticos donde los estudiantes ponen a prueba su ingenio.</p>
+        <span class="card-info" role="button" aria-label="Ver descripción">i</span>
       </a>
 
     </div>
@@ -230,7 +329,7 @@
     <div class="intro-video-frame">
       <button class="intro-video-close" id="closeIntroVideo" type="button" aria-label="Cerrar presentación">&times;</button>
       <video id="introVideo" autoplay playsinline preload="auto">
-        <source src="Presentacion2026.mp4" type="video/mp4">
+        <source src="Presentación2026.mp4" type="video/mp4">
         Tu navegador no puede reproducir este video.
       </video>
       <button class="intro-video-audio" id="enableIntroAudio" type="button" hidden>Activar sonido y reproducir</button>
@@ -274,7 +373,6 @@
       const sidebar = document.getElementById('sidebar');
       const overlay = document.getElementById('introVideoOverlay');
       const video   = document.getElementById('introVideo');
-      const sound   = document.getElementById('sidebarButtonSound');
 
       // Si el archivo del video no se encuentra o no carga, se quita la pantalla negra
       // para que no bloquee la página.
@@ -287,10 +385,30 @@
 
       if (!toggle || !sidebar) return;
 
+      // Sonido del sidebar: se prueba primero "sidebarButtonSound" y, si ese archivo
+      // no carga, se usa "clickSound1" (así suena aunque una de las dos rutas falle).
+      const sonidos = [
+        document.getElementById('sidebarButtonSound'),
+        document.getElementById('clickSound1')
+      ].filter(Boolean);
+
+      const reproducir = () => {
+        let i = 0;
+        const intentar = () => {
+          if (i >= sonidos.length) return;
+          const audio = sonidos[i++];
+          try { audio.pause(); audio.currentTime = 0; audio.volume = 0.5; } catch (_) {}
+          const p = audio.play();
+          if (p && p.catch) p.catch(intentar);
+        };
+        intentar();
+      };
+
       const setOpen = (open) => {
         sidebar.classList.toggle('active', open);
         toggle.setAttribute('aria-expanded', String(open));
         toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+        reproducir();
       };
 
       // Se escucha en la fase de captura para que el botón responda una sola vez
@@ -303,7 +421,6 @@
         if (e.target.closest('#menuToggle')) {
           e.preventDefault();
           e.stopImmediatePropagation();
-          if (sound) { try { sound.currentTime = 0; sound.play().catch(() => {}); } catch (_) {} }
           setOpen(!sidebar.classList.contains('active'));
           return;
         }
@@ -314,7 +431,33 @@
       }, true);
 
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') setOpen(false);
+        if (e.key === 'Escape' && sidebar.classList.contains('active')) setOpen(false);
+      });
+    })();
+  </script>
+
+  <!-- Botón "i" de las tarjetas (celulares): abre y cierra la descripción -->
+  <script>
+    (() => {
+      const tarjetas = document.querySelectorAll('.hud-card');
+
+      document.querySelectorAll('.card-info').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          // Evita que el toque abra la sección
+          e.preventDefault();
+          e.stopPropagation();
+          const tarjeta = btn.closest('.hud-card');
+          const abierta = tarjeta.classList.contains('desc-open');
+          tarjetas.forEach((t) => t.classList.remove('desc-open'));
+          if (!abierta) tarjeta.classList.add('desc-open');
+        });
+      });
+
+      // Tocar fuera de una tarjeta cierra la descripción abierta
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.hud-card')) {
+          tarjetas.forEach((t) => t.classList.remove('desc-open'));
+        }
       });
     })();
   </script>
@@ -326,7 +469,7 @@
   <audio id="clickSound" preload="auto">
     <source src="touhou-pause-sfx.mp3" type="audio/mpeg">
   </audio>
-  <audio id="clickSound1" preload="auto" src="door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3"></audio>
+  <audio id="clickSound1" preload="auto" src="mp3/door-slamming-fnaf-1-sound-effects_UlbbmU5.mp3"></audio>
   <audio id="clickYear1" preload="auto">
     <source src="fnaf-open-camera-sound.mp3" type="audio/mpeg">
   </audio>
